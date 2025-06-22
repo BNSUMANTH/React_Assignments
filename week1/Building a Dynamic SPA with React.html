@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React SPA - State Based</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    nav {
+      margin-bottom: 20px;
+    }
+    nav button {
+      margin-right: 10px;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .page {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [activePage, setActivePage] = React.useState('Home');
+
+      const pageStyles = {
+        Home: { backgroundColor: '#f0f8ff' },
+        About: { backgroundColor: '#fff8dc' },
+        Contact: { backgroundColor: '#f5f5f5' },
+      };
+
+      const renderPageContent = () => {
+        
+        switch (activePage) {
+          case 'Home':
+            return <p>🏠 Welcome to Home</p>;
+          case 'About':
+            return <p>ℹ️ About Us</p>;
+          case 'Contact':
+            return <p>📞 Contact Us</p>;
+          default:
+            return <p>Page not found</p>;
+        }
+      };
+
+      return (
+        <div>
+          <nav>
+            <button onClick={() => setActivePage('Home')}>Home</button>
+            <button onClick={() => setActivePage('About')}>About</button>
+            <button onClick={() => setActivePage('Contact')}>Contact</button>
+          </nav>
+
+          <div className="page" style={pageStyles[activePage]}>
+            <h2>{activePage} Page</h2>
+            {renderPageContent()}
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
