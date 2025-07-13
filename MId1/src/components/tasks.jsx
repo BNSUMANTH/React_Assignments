@@ -19,7 +19,6 @@ export const Tasks = () => {
         setTitle("");
         setDesc("");
     }
-    const doneCount=tasks.filter(t=>t.done).length;
 
   return (
     <div>
@@ -30,12 +29,13 @@ export const Tasks = () => {
             <button>Add</button>
         </form>
         <ul>
-            {tasks.map(task=>(
+            {tasks.map((task,ind)=>(
                 <li>
+                <span></span>
                     <input type="checkbox" checked={task.done} onChange={()=>toggleDone(task.id)}/>
                     <span>{task.title}{task.description}</span>
                 </li>
-            ))}
+            ),0)}
         </ul>
     </div>
   )
